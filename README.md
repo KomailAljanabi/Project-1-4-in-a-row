@@ -20,4 +20,8 @@
 ## Credits
 * **Komail Aljanabi** - *Initial Work & Development*
 * Thank you to my course instructors for their guidance and mentorship.
+<<<<<<< HEAD
 * Thanks to my classmates for their feedback during testing.
+=======
+* Thanks to my classmates for their feedback during testing.
+>>>>>>> 371634118b0973da048592d17dfcbed687670246
