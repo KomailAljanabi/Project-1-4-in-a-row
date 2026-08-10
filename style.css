@@ -67,13 +67,18 @@ footer {
     background-color: black;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
-.socialmedia {}
+.socialmedia {
+    height: 65px;
+    width: 70px;
+    border-radius: 50px;
+    margin: 5px 5px;
+}
 
 #Credits {
     color: white;
     font-size: larger;
+    margin-left: 30vw;
 }
