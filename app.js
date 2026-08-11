@@ -3,6 +3,8 @@ const player = 'A', computer = 'B'
 /*-------------------------------- Variables --------------------------------*/
 let winning_vertical = [], winning_horizontal = [], winning_cross = []
 let locat_Ver = 1, locat_hori = 1, locat_CrossL = 1, locat_CrossR = 61
+let pfCondition = false, cfCondition = false
+let playerCoins = [], computerCoins = []
 
 for (let i = 1; i < 8; i++) {
     for (let iter_Vert = 0; iter_Vert < 3; iter_Vert++) {
@@ -46,25 +48,62 @@ const pfButton = document.querySelector('#pf')
 const cfButton = document.querySelector('#cf')
 const locations = document.querySelectorAll('.coinHolder')
 const msg = document.querySelector('#Message')
-const instruction = document.querySelector('#removeOnPlay') 
+const instruction = document.querySelector('#removeOnPlay')
 /*----------------------------- Event Listeners -----------------------------*/
-
+resetButton.addEventListener('click',)
+pfButton.addEventListener('click',)
+cfButton.addEventListener('click',)
+locations.forEach(
+    function (location) {
+        location.addEventListener('click', startGame())
+    }
+)
 /*-------------------------------- Functions --------------------------------*/
-function winning(){
+function winning() {
 
 }
-function playerClick(){
+function playerClick() {
 
 }
-function computerChoice(){
-    
-}
-function resetting(){
+function computerChoice() {
 
 }
-function playerFirst(){
-
+function resetting() {
+    msg.textContent = ''
+    instruction.textContent = ''
+    pfCondition = false
+    cfCondition = false
+    playerCoins = [], computerCoins = []
+    /* locations.forEach(
+         function(location){
+             location.style('
+                 height: 55px;
+ width: 7vw;
+ margin: 6px 6px 6px 6px;
+ background-color: black;
+ border-radius: 45%;
+                 ')
+         }
+     )
+ }*/
 }
-function computerFirst(){
+function playerFirst() {
+    msg.textContent = ''
+    instruction.textContent = ''
+    pfCondition = true
+}
+function computerFirst() {
+    msg.textContent = ''
+    instruction.textContent = ''
+    cfCondition = true
+    computerChoice()
+}
 
+function startGame() {
+    msg.textContent = ''
+    instruction.textContent = ''
+    playerClick()
+    winning()
+    computerChoice()
+    winning()
 }
