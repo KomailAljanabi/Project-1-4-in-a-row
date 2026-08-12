@@ -1,10 +1,11 @@
 /*-------------------------------- Constants --------------------------------*/
-const player = 'A', computer = 'B'
+const player = 'yellow', computer = 'red'
 /*-------------------------------- Variables --------------------------------*/
 let winning_vertical = [], winning_horizontal = [], winning_cross = []
 let locat_Ver = 1, locat_hori = 1, locat_CrossL = 1, locat_CrossR = 61
-let pfCondition = false, cfCondition = false
+let pfCondition = false, cfCondition = false, gameOver = false
 let playerCoins = [], computerCoins = []
+let playerPoints = 0, computerPoints = 0
 
 for (let i = 1; i < 8; i++) {
     for (let iter_Vert = 0; iter_Vert < 3; iter_Vert++) {
@@ -41,7 +42,6 @@ for (let i = 1; i < 4; i++) {
     locat_CrossR = i + 61
 }
 console.log(winning_cross)
-
 /*------------------------ Cached Element References ------------------------*/
 const resetButton = document.querySelector('#reset')
 const pfButton = document.querySelector('#pf')
@@ -49,61 +49,127 @@ const cfButton = document.querySelector('#cf')
 const locations = document.querySelectorAll('.coinHolder')
 const msg = document.querySelector('#Message')
 const instruction = document.querySelector('#removeOnPlay')
+const plPoints = document.querySelector('#pp')
+const coPoints = document.querySelector('#cp')
+console.log(locations)
 /*----------------------------- Event Listeners -----------------------------*/
-resetButton.addEventListener('click',)
-pfButton.addEventListener('click',)
-cfButton.addEventListener('click',)
+resetButton.addEventListener('click', resetting())
+pfButton.addEventListener('click', playerFirst())
+cfButton.addEventListener('click', computerFirst())
 locations.forEach(
     function (location) {
-        location.addEventListener('click', startGame())
+        location.addEventListener('click', startGame(location))
     }
 )
+
 /*-------------------------------- Functions --------------------------------*/
 function winning() {
+    for (let i = 0; i < winning_cross.length; i++) {
+        if (winning_cross[i].every(values => playerCoins.includes(values)) || winning_horizontal[i].every(values => playerCoins.includes(values)) || winning_vertical[i].every(values => playerCoins.includes(values))) {
+            playerPoints += 1
+            gameOver = true
+            plPoints.textContent = playerPoints
+            break
+        }
+        else if (winning_cross[i].every(values => computerCoins.includes(values)) || winning_horizontal[i].every(values => computerCoins.includes(values)) || winning_vertical[i].every(values => computerCoins.includes(values))) {
+            computerPoints += 1
+            gameOver = true
+            coPoints.textContent = computerPoints
+            break
+        }
+    }
 
 }
-function playerClick() {
+function playerClick(location) {
+    checker(location, player, playerCoins)
 
 }
 function computerChoice() {
+    let cc = Math.round(Math.random() * 70)
+    let coLocation
+    locations.forEach(
+        function(loc){
+            if(loc.target.id === cc)
+                coLocation = loc
+        }
+    )
+    
+    checker(coLocation,computer,computerCoins)
+}
+function checker(location, who, toPush) {
+    for (let i = 6; i > 0; i--) {
+        if (location.target.id > 10) {
+            let startIndex = Math.round(location.target.id / 10) * 10
+            foreach.locations(
+                function (loc) {
+                    if (loc.target.id === startIndex + i) {
+                        if (loc.style.backround - color === black) {
+                            loc.style.backround - color === who
+                            toPush.push(startIndex + i)
+                            
+                        }
+                    }
+                }
+            )
+        }
+        else {
+            foreach.locations(
+                function (loc) {
+                    if (loc.target.id === i) {
+                        if (loc.style.backround-color === black) {
+                            loc.style.backround-color === who
+                            toPush.push(i)
+                            
+                        }
+                    }
+                }
+            )
+        }
+    }
 
 }
+
 function resetting() {
     msg.textContent = ''
     instruction.textContent = ''
     pfCondition = false
     cfCondition = false
+    gameOver = false
     playerCoins = [], computerCoins = []
-    /* locations.forEach(
-         function(location){
-             location.style('
-                 height: 55px;
- width: 7vw;
- margin: 6px 6px 6px 6px;
- background-color: black;
- border-radius: 45%;
-                 ')
-         }
-     )
- }*/
+    computerPoints = 0
+    playerPoints = 0
+    locations.forEach(
+        function (location) {
+            location.style.background-color === black
+        }
+    )
 }
+
+
 function playerFirst() {
     msg.textContent = ''
     instruction.textContent = ''
     pfCondition = true
+    gameOver = false
+    playerCoins = [], computerCoins = []
 }
+
 function computerFirst() {
     msg.textContent = ''
     instruction.textContent = ''
     cfCondition = true
+    gameOver = false
+    playerCoins = [], computerCoins = []
     computerChoice()
 }
 
-function startGame() {
+function startGame(location) {
     msg.textContent = ''
     instruction.textContent = ''
-    playerClick()
+    if(!gameOver){
+    playerClick(location)
     winning()
     computerChoice()
     winning()
+    }
 }
