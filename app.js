@@ -89,14 +89,16 @@ function winning() {
 }
 
 function playerClick(location) {
-    checker(location.target, player, playerCoins)
+    return checker(location.target, player, playerCoins)
 }
 
 function computerChoice() {
-    let randomIndex = Math.floor(Math.random() * locations.length)
-    let coLocation = locations[randomIndex]
-
-    checker(coLocation, computer, computerCoins)
+    let successful = false
+    while (!successful) {
+        let randomIndex = Math.floor(Math.random() * locations.length)
+        let coLocation = locations[randomIndex]
+        successful = checker(coLocation, computer, computerCoins)
+    }
 }
 
 function checker(location, who, toPush) {
@@ -108,7 +110,7 @@ function checker(location, who, toPush) {
                     if (loc.style.backgroundColor === 'black' || loc.style.backgroundColor === 'grey') {
                         loc.style.backgroundColor = who
                         toPush.push(startIndex + i)
-                        return
+                        return true
                     }
                 }
             }
@@ -119,12 +121,13 @@ function checker(location, who, toPush) {
                     if (loc.style.backgroundColor === 'black' || loc.style.backgroundColor === 'grey') {
                         loc.style.backgroundColor = who
                         toPush.push(i)
-                        return
+                        return true
                     }
                 }
             }
         }
     }
+    return false
 }
 
 function resetting() {
@@ -176,14 +179,15 @@ function computerFirst() {
 
 function startGame(location) {
     if (!gameOver) {
-        playerClick(location)
-        winning()
+        let successful = playerClick(location)
+        if (successful) {
+            winning()
+            if (!gameOver) {
+                computerChoice()
+                winning()
+            }
+        }
     }
-    if (!gameOver) {
-        computerChoice()
-        winning()
-    }
-
 }
 
 function hover(loc) {
