@@ -16,7 +16,6 @@ for (let i = 1; i < 8; i++) {
     locat_Ver = 1 + (i * 10)
 
 }
-console.log(winning_combos)
 
 for (let i = 1; i < 7; i++) {
     for (let iter_hori = 0; iter_hori < 4; iter_hori++) {
@@ -25,7 +24,6 @@ for (let i = 1; i < 7; i++) {
     }
     locat_hori = i + 1
 }
-console.log(winning_combos)
 
 for (let i = 1; i < 4; i++) {
     for (let iterCrossL = 0; iterCrossL < 4; iterCrossL++) {
@@ -54,6 +52,7 @@ const msg = document.querySelector('#Message')
 const instruction = document.querySelector('#removeOnPlay')
 const plPoints = document.querySelector('#pp')
 const coPoints = document.querySelector('#cp')
+
 console.log(locations)
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -63,6 +62,8 @@ cfButton.addEventListener('click', computerFirst)
 locations.forEach(
     function (location) {
         location.addEventListener('click', startGame)
+        location.addEventListener('mouseenter', hover)
+        location.addEventListener('mouseleave', unhover)
     }
 )
 
@@ -86,6 +87,7 @@ function winning() {
     }
 
 }
+
 function playerClick(location) {
     checker(location.target, player, playerCoins)
 }
@@ -103,7 +105,7 @@ function checker(location, who, toPush) {
             let startIndex = Math.floor(Number(location.id) / 10) * 10
             for (let loc of locations) {
                 if (Number(loc.id) === startIndex + i) {
-                    if (loc.style.backgroundColor === 'black') {
+                    if (loc.style.backgroundColor === 'black' || loc.style.backgroundColor === 'grey') {
                         loc.style.backgroundColor = who
                         toPush.push(startIndex + i)
                         return
@@ -111,11 +113,10 @@ function checker(location, who, toPush) {
                 }
             }
         }
-
         else {
             for (let loc of locations) {
                 if (Number(loc.id) === i) {
-                    if (loc.style.backgroundColor === 'black') {
+                    if (loc.style.backgroundColor === 'black' || loc.style.backgroundColor === 'grey') {
                         loc.style.backgroundColor = who
                         toPush.push(i)
                         return
@@ -123,11 +124,8 @@ function checker(location, who, toPush) {
                 }
             }
         }
-
     }
 }
-
-
 
 function resetting() {
     msg.textContent = ''
@@ -145,9 +143,7 @@ function resetting() {
             location.style.backgroundColor = 'black'
         }
     )
-    
 }
-
 
 function playerFirst() {
     msg.textContent = ''
@@ -175,7 +171,6 @@ function computerFirst() {
             location.style.backgroundColor = 'black'
         }
     )
-    
     computerChoice()
 }
 
@@ -189,4 +184,14 @@ function startGame(location) {
         winning()
     }
 
+}
+
+function hover(loc) {
+    if (loc.target.style.backgroundColor === 'black')
+        loc.target.style.backgroundColor = 'grey'
+}
+
+function unhover(loc) {
+    if (loc.target.style.backgroundColor === 'grey')
+        loc.target.style.backgroundColor = 'black'
 }

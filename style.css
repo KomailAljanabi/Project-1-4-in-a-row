@@ -34,25 +34,24 @@ main {
     text-align: center;
 }
 
-#shape{
+#shape {
     background-color: #1766A6;
     margin-left: 22.5vw;
     height: 380px;
     width: 55vw;
-    display: flex;  
+    display: flex;
 }
 
-.coinHolder{
-height: 55px;
-width: 7vw;
-margin: 6px 6px 6px 6px;
-background-color: black;
-border-radius: 45%;
+.coinHolder {
+    height: 55px;
+    width: 7vw;
+    margin: 6px 6px 6px 6px;
+    background-color: black;
+    border-radius: 45%;
 }
 
 .coinHolder:hover {
     background-color: grey;
-    cursor: pointer;
 }
 
 #Message {
