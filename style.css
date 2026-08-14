@@ -50,8 +50,9 @@ background-color: black;
 border-radius: 45%;
 }
 
-.coinHolder:hover{
+.coinHolder:hover {
     background-color: grey;
+    cursor: pointer;
 }
 
 #Message {
