@@ -75,6 +75,7 @@ function winning() {
             gameOver = true
             plPoints.textContent = playerPoints
             msg.textContent = 'You Win'
+            msg.style.color = 'green'
             break
         }
         else if (winning_combos[i].every(values => computerCoins.includes(values))) {
@@ -82,6 +83,7 @@ function winning() {
             gameOver = true
             coPoints.textContent = computerPoints
             msg.textContent = 'Computer Wins'
+            msg.style.color = 'red'
             break
         }
     }
