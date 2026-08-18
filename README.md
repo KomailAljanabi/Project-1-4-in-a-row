@@ -15,7 +15,12 @@
 - I want to reset whenever during the game
 
 ## Screenshots
+- The Model of the Game
 ![alt 4 in a row example picture](./images.jpg)
+- PC Version
+![PC Version picture](./Screenshot1.png)
+- Mobile Version
+![Mobile Version picture](./Screenshot2.png)
 
 ## Credits
 * **Komail Aljanabi** - *Initial Work & Development*
